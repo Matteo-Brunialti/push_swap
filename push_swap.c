@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:31:03 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/08/26 19:57:22 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/08/27 20:56:08 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ int validate_argv(int argc, char *argv[])
 	{
 		i = 0;
 		while (argv[argc][i] != '\0')
+		{
 			if (!(argv[argc][i] > '0' && argv[argc][i] < '9'))
 				return (-1);
+			i++;
+		}
 		argc--;
 	}
 	return (0);	
@@ -29,20 +32,24 @@ int validate_argv(int argc, char *argv[])
 
 int main(int argc, char *argv[])
 {
-	t_dll **stack1;
+	t_dll *stack1;
 
-	int i = 1;
+	stack1 = NULL;
+	int i = argc -1 ;
 	if (argc < 2)
 		return (0);
 	else
 	{
-		validate_argv(argc, argv);
-		while (i < argc)
+		//validate_argv(argc, argv);
+		while (i > 0)
 		{
-			// just go for ddl new fuker
+
+			create_dll_node_front(&stack1, atoi(argv[i]));
+			i--;
 		}
-		
+		print_dll(&stack1);
 	}
+	// free sto cazzo
 	return (0);
 	
 }
