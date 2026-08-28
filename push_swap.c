@@ -6,50 +6,42 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:31:03 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/08/27 20:56:08 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/08/28 17:51:41 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "push_swap.h"
+#include "push_swap.h"
 
-
-int validate_argv(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	int i;
-	while (argc > 1)
-	{
-		i = 0;
-		while (argv[argc][i] != '\0')
-		{
-			if (!(argv[argc][i] > '0' && argv[argc][i] < '9'))
-				return (-1);
-			i++;
-		}
-		argc--;
-	}
-	return (0);	
-}
-
-int main(int argc, char *argv[])
-{
-	t_dll *stack1;
+	t_dll	*stack1;
+	int		i;
 
 	stack1 = NULL;
-	int i = argc -1 ;
+	i = argc - 1;
 	if (argc < 2)
 		return (0);
 	else
 	{
-		//validate_argv(argc, argv);
+		// if (validate_argv(argc, argv) == -1)
+		// 	return (write(1, "Error\n", 6));
 		while (i > 0)
 		{
-
-			create_dll_node_front(&stack1, atoi(argv[i]));
+			circular_dll_create_front_node(&stack1, atoi(argv[i]));
 			i--;
 		}
-		print_dll(&stack1);
 	}
+	printf("-------original stack-----------\n");
+	print_dll(&stack1);
+	printf("--------operation swap--------\n");
+	swap(&stack1);
+	print_dll(&stack1);
+	printf("--------operation rotate--------\n");
+	rotate(&stack1);
+	print_dll(&stack1);
+	printf("--------operation reverse rotate--------\n");
+	reverse_rotate(&stack1);
+	print_dll(&stack1);
 	// free sto cazzo
 	return (0);
-	
 }
