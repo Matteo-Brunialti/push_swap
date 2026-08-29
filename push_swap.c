@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:31:03 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/08/28 17:51:41 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/08/29 10:45:30 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-	t_dll	*stack1;
-	int		i;
+	t_dll *stack1 = NULL;
+	t_dll *stack2 = NULL;
+	int i;
 
-	stack1 = NULL;
 	i = argc - 1;
 	if (argc < 2)
 		return (0);
@@ -42,6 +42,12 @@ int	main(int argc, char *argv[])
 	printf("--------operation reverse rotate--------\n");
 	reverse_rotate(&stack1);
 	print_dll(&stack1);
-	// free sto cazzo
+	printf("--------operation push --------\n");
+	push(&stack1, &stack2);
+	printf("ocho stack 1\n");
+	print_dll(&stack1); // free sto cazzo
+	printf("ocho stack 2\n");
+	print_dll(&stack2); // free sto cazzo
+	
 	return (0);
 }
