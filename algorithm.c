@@ -1,14 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_input.c                                      :+:      :+:    :+:   */
+/*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/28 15:38:46 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/08/28 15:39:44 by mbrunial         ###   ########.fr       */
+/*   Created: 2026/09/09 19:55:58 by mbrunial          #+#    #+#             */
+/*   Updated: 2026/09/09 20:28:17 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+# include "push_swap.h"
 
+void bubble(t_dll **stack1, t_dll **stack2, int len)
+{
+	int	i;
+	int	j;
+	
+	i = 0;
+	while (i < )
+	
+	
+}

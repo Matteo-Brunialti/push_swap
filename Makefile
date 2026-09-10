@@ -1,11 +1,12 @@
-NAME	= pushswap
+NAME	= push_swap
 
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g
 
-SRC		= push_swap.c \
-		  operations.c \
-		  ps_dll.c
+SRC		=	push_swap.c				\
+			operations.c			\
+			doubly_linked_list.c	\
+			validate_args.c	
 
 OBJ		= $(SRC:.c=.o)
 
