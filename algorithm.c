@@ -3,37 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 19:55:58 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/10 21:25:00 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/11 10:33:14 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "push_swap.h"
+#include "push_swap.h"
 
 void bubble(t_dll **stack1, t_dll **stack2, int len_stack1)
 {
-	int	i;
-	int	j;
-	
+	int i;
+	int j;
+
 	i = 0;
 	while (i++ < (len_stack1))
-		push(stack1, stack2, "pb\n");
+	{
+		push(stack1, stack2);
+		write(1, "pb\n", 3);
+	}
 	i = 0;
-	while (i < (len_stack1 - 1))
+	while (i++ < (len_stack1))
 	{
 		j = i;
-		while (j < (len_stack1 - 1))
+		while (j++ < len_stack1)
 		{
 			if (stack2[0]->num > stack2[0]->next->num)
-				swap(stack2, "sb\n");
-			rotate(stack2, "rb\n");
-			j++;
+			{
+				swap(stack2);
+				write(1, "sb\n", 3);
+			}
+			rotate(stack2);
+			write(1, "rb\n", 3);
 		}
-		push(stack2, stack1, "pa\n");
-		i++;
+		push(stack2, stack1);
+		write(1, "pa\n", 3);
 	}
-	push(stack2, stack1, "pa\n");
 }
 
+void range_sort()

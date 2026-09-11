@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:17:52 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/10 21:24:49 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/11 10:14:59 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* Swap the first two elements at the top of stack.
  * Do nothing if there is only one or no elements.
  */
-int	swap(t_dll **head, char *str)
+int	swap(t_dll **head)
 {
 	t_dll	*first_node;
 	t_dll	*last_node;
@@ -27,7 +27,6 @@ int	swap(t_dll **head, char *str)
 	if ((*head)->next == (*head)->prev)
 	{
 		(*head) = (*head)->next;
-		write(1, str, 3);	
 		return (0);
 	}
 	first_node = (*head);
@@ -40,7 +39,6 @@ int	swap(t_dll **head, char *str)
 	third_node->prev = first_node;
 	first_node->prev = (*head);
 	(*head)->prev = last_node;
-	write(1, str, 3);	
 	return (0);
 }
 
@@ -69,7 +67,7 @@ static int	push_front_node(t_dll **head, t_dll *node)
 /* Take the first element at the top of b and put it at the top of a.
  * Do nothing if b is empty.
  */
-int	push(t_dll **head1, t_dll **head2, char *str)
+int	push(t_dll **head1, t_dll **head2)
 {
 	t_dll	*first_node;
 	t_dll	*last_node;
@@ -81,7 +79,6 @@ int	push(t_dll **head1, t_dll **head2, char *str)
 		first_node = (*head1);
 		(*head1) = NULL;
 		push_front_node(head2, first_node);
-		write(1, str, 3);	
 		return (0);
 	}
 	last_node = (*head1)->prev;
@@ -90,30 +87,27 @@ int	push(t_dll **head1, t_dll **head2, char *str)
 	(*head1)->prev = last_node;
 	last_node->next = (*head1);
 	push_front_node(head2, first_node);
-	write(1, str, 3);	
 	return (0);
 }
 
 /* Shift up all elements of stack by one.
  * The first element becomes the last one.
  */
-int	rotate(t_dll **head, char *str)
+int	rotate(t_dll **head)
 {
 	if ((*head) == NULL)
 		return (0);
 	(*head) = (*head)->next;
-	write(1, str, 3);	
 	return (0);	
 }
 
 /* Shift down all elements of stack by one.
  * The last element becomes the first one.
  */
-int	reverse_rotate(t_dll **head, char *str)
+int	reverse_rotate(t_dll **head)
 {
 	if ((*head) == NULL)
 		return (0);
 	(*head) = (*head)->prev;
-	write(1, str, 4);	
 	return (0);
 }

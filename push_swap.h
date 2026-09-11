@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:08:01 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/10 13:25:50 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/11 10:16:59 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ int					circular_dll_create_front_node(t_dll **head, int num);
 void				reverse_print_dll(t_dll **stack);
 
 // operation.c
-int					rotate(t_dll **head, char *str);
-int					reverse_rotate(t_dll **head, char *str);
-int					swap(t_dll **head, char *str);
-int					push(t_dll **head1, t_dll **head2, char *str);
+int					rotate(t_dll **head);
+int					reverse_rotate(t_dll **head);
+int					swap(t_dll **head);
+int					push(t_dll **head1, t_dll **head2);
 
 // validate_args.c
 int					validate_args(int argc, char **argv);
