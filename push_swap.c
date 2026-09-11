@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:31:03 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/09 19:55:29 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/10 21:23:12 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,17 @@ int main(int argc, char *argv[])
 		return (write(1, "Error\n", 6));
 	while (i > 0)
 	{
-		if (circular_dll_create_front_node(&stack1, is_int(argv[i])) == -1);
+		if (circular_dll_create_front_node(&stack1, is_int(argv[i])) == -1)
 			return (write(1, "Error\n", 6));
 		i--;
 	}
+	// print_dll(&stack1);
+	bubble(&stack1, &stack2, (argc - 1));
+	// printf("---------------------------------------\n");
+	// print_dll(&stack1);
+	// printf("---------------------------------------\n");
+	// reverse_print_dll(&stack1);
+	// (void)is_sorted(stack1);
 	return (0);
 }
+

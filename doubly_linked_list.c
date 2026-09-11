@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:07:21 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/09 19:53:50 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/10 13:20:17 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	print_dll(t_dll **stack)
 	curr = (*stack);
 	while (curr->next != (*stack))
 	{
-		printf("%d\n", curr->num);
+		printf("%d ", curr->num);
 		curr = curr->next;
 	}
 	printf("%d\n", curr->num);
@@ -100,8 +100,30 @@ void	reverse_print_dll(t_dll **stack)
 	while (curr->prev != (*stack))
 	{
 		curr = curr->prev;
-		printf("%d\n", curr->num);
+		printf("%d ", curr->num);
 	}
 	curr = curr->prev;
 	printf("%d\n", curr->num);
+}
+
+
+int is_sorted(t_dll *stack)
+{
+	t_dll	*curr;
+
+	if (stack == NULL)
+		return (-1);
+	curr = stack;
+	while (curr->next != stack)
+	{
+		if (curr->num >= curr->next->num)
+		{
+			printf("[ERROR] Stack is not sorted\n");
+			return (-1);
+		}
+		curr = curr->next;
+	}
+	printf("[OK] Stack is sorted!\n");
+
+	return (0);
 }

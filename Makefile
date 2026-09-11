@@ -6,7 +6,8 @@ CFLAGS	= -Wall -Wextra -Werror -g
 SRC		=	push_swap.c				\
 			operations.c			\
 			doubly_linked_list.c	\
-			validate_args.c	
+			validate_args.c			\
+			algorithm.c	
 
 OBJ		= $(SRC:.c=.o)
 
