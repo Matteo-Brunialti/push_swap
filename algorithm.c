@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 19:55:58 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/11 10:33:14 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/14 11:54:56 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,3 @@ void bubble(t_dll **stack1, t_dll **stack2, int len_stack1)
 		write(1, "pa\n", 3);
 	}
 }
-
-void range_sort()
