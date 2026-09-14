@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:38:46 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/09 19:42:11 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/14 13:03:36 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,43 @@ int	validate_args(int argc, char **argv)
 	if (tmp_i == LLONG_MIN)
 		return (-1);
 	return (0);
+}
+
+static bool option_cmp(char *str, char*option)
+{
+	ssize_t	i;
+
+	i = 0;
+	while (str[i] && option[i])
+		i++;
+	if (str[i] == option[i])
+		return (true);
+	return (false);
+}
+/*
+ * AO: this function assume argc and atgv has 3 argument in it 
+ * the program name and at least 2 argument let them be number  or option
+ */
+int	option(t_options *options, int argc, char **argv)
+{
+	if (option_cmp(argv[1], "--simple") || option_cmp(argv[2], "--simple"))
+		options->simple = true;
+	else
+		options->simple = false;
+	if (option_cmp(argv[1], "--medium") || option_cmp(argv[2], "--medium"))
+		options->medium = true;
+	else
+		options->medium = false;
+	if (option_cmp(argv[1], "--complex") || option_cmp(argv[2], "--complex"))
+		options->complex = true;
+	else
+		options->complex = false;
+	if (option_cmp(argv[1], "--adaptive") || option_cmp(argv[2], "--adaptive"))
+		options->adaptive = true;
+	else
+		options->adaptive = false;
+	if (option_cmp(argv[1], "--bench") || option_cmp(argv[2], "--bench"))
+		options->bench = true;
+	else
+		options->bench = false;
 }
