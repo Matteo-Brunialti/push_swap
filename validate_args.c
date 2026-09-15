@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:38:46 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/15 12:43:03 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/15 22:13:10 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ long long is_int(char *str)
 	int sign;
 	int i;
 
-	if (!(*str))
+	if (!str || !(*str))
 		return (LLONG_MIN);
 	sign = 1;
 	i = 0;
@@ -55,7 +55,8 @@ long long is_int(char *str)
 	return (res);
 }
 
-/* The function validate_int_args(int argc, char **argv) takes the argument passed
+/* THIS COMMENT IS NOT UPDATED PLS DONT REFER TO IT FOR COMPLETE INFO. 
+ * The function validate_int_args(int argc, char **argv) takes the argument passed
  * 	to the program and check if they are valid for the 42 push_swap project.
  * It is assumes that at least 1 parameter was passed, no argument are checked
  * 	at the main level.
@@ -70,7 +71,7 @@ long long is_int(char *str)
  * 			- integer outside the valid range
  * 			- duplicate values
  */
-static int validate_int_args(int argc, char **argv)
+static int validate_int_args(int argc, char **argv, int shift)
 {
 	long long tmp_i;
 	long long tmp_j;
@@ -96,7 +97,7 @@ static int validate_int_args(int argc, char **argv)
 	tmp_i = is_int(argv[i]);
 	if (tmp_i == LLONG_MIN)
 		return (-1);
-	return (0);
+	return (shift);
 }
 
 static bool option_cmp(char *str, char *option)
@@ -104,7 +105,7 @@ static bool option_cmp(char *str, char *option)
 	ssize_t i;
 
 	i = 0;
-	while (str[i] && option[i])
+	while (str[i] && option[i] && str[i] == option[i])
 		i++;
 	if (str[i] == option[i])
 		return (true);
@@ -116,7 +117,7 @@ static void set_options_to_false(t_options *options)
 	options->simple = false;
 	options->medium = false;
 	options->complex = false;
-	options->adaptive = false;
+	options->adaptive = true;
 	options->bench = false;
 	options->sa = 0;
 	options->sb = 0;
@@ -149,8 +150,8 @@ int validate_args(t_options *options, int argc, char **argv)
 		options->medium = true;
 	if (option_cmp(argv[1], "--complex") != option_cmp(argv[2], "--complex"))
 		options->complex = true;
-	if (option_cmp(argv[1], "--adaptive") != option_cmp(argv[2], "--adaptive"))
-		options->adaptive = true;
+	if (!(option_cmp(argv[1], "--adaptive") || option_cmp(argv[2], "--adaptive")))
+		options->adaptive = false;
 	if (option_cmp(argv[1], "--bench") != option_cmp(argv[2], "--bench"))
 		options->bench = true;
 	if (options->simple)
@@ -163,5 +164,5 @@ int validate_args(t_options *options, int argc, char **argv)
 		shift++;
 	if (options->bench)
 		shift++;
-	return (validate_int_args(argc + shift, argv + shift));
+	return (validate_int_args(argc - shift, argv + shift, shift));
 }

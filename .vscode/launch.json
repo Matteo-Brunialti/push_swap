@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "push_swap",
-            "args": ["3", "2", "4", "1"],
+            "args": ["--simple" ,"3", "2", "4", "1"],
             "stopAtEntry": false,
             "cwd": "/home/matteo/Desktop/42/push_swap/",
             "environment": [],
