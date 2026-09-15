@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:31:03 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/14 12:13:48 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/15 12:47:53 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 	if (argc < 2)
 		return (0);
 	i = argc - 1;
-	if (validate_args(argc, argv) == -1)
+	if (validate_args(&options, argc, argv) == -1)
 		return (write(1, "Error\n", 6));
 	while (i > 0)
 	{
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 		i--;
 	}
 	// print_dll(&stack1);
-	bubble(&stack1, &stack2, (argc - 1));
+	bubble(&stack1, &stack2, (argc - 1), &options);
 	// printf("---------------------------------------\n");
 	// print_dll(&stack1);
 	// printf("---------------------------------------\n");

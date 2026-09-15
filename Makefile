@@ -4,7 +4,10 @@ CC		= cc
 CFLAGS	= -Wall -Wextra -Werror -g
 
 SRC		=	push_swap.c				\
-			operations.c			\
+			rotate.c				\
+			swap.c					\
+			push.c					\
+			reverse_rotate.c 		\
 			doubly_linked_list.c	\
 			validate_args.c			\
 			algorithm.c	
