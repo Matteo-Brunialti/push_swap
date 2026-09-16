@@ -6,31 +6,30 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:07:21 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/10 13:20:17 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/16 17:12:55 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/* The void	free_dll(t_dll **head) is a helper function that free a doubly linked 
+/* The void	free_dll(t_dll **head) is a helper function that free a doubly linked
  * 	list
- * 
+ *
  * head and it's value (*head) are checked for NULL
  */
-void free_dll(t_dll **head)
+void	free_dll(t_dll **head)
 {
 	t_dll	*next_node;
 	t_dll	*current_node;
 
 	if (head == NULL || (*head) == NULL)
 		return ;
-	current_node= (*head)->next;
-	while(current_node != (*head))
+	current_node = (*head)->next;
+	while (current_node != (*head))
 	{
 		next_node = current_node->next;
 		free(current_node);
 		current_node = next_node;
-		
 	}
 	free((*head));
 	(*head) = NULL;
@@ -39,11 +38,11 @@ void free_dll(t_dll **head)
 /* The int	circular_dll_create_front_node(t_dll **head, int num) creates a
  * 	doubly linked list (dll) with the content as a integer.
  * It add new node to a dll and it assues that (*head) is NULL for empty dll.
- * It's a function used in the 42 push_swap project. 
- * 
+ * It's a function used in the 42 push_swap project.
+ *
  * Error:
  * 		If malloc fail a -1 erro is returned
- * 
+ *
  * Note:
  * 		the validity of head is not checked.
  */
@@ -106,10 +105,9 @@ void	reverse_print_dll(t_dll **stack)
 	printf("%d\n", curr->num);
 }
 
-
-int is_sorted(t_dll *stack)
+int	is_sorted(t_dll *stack)
 {
-	t_dll	*curr;
+	t_dll *curr;
 
 	if (stack == NULL)
 		return (-1);
