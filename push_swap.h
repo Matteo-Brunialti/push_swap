@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:08:01 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/15 12:46:54 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/16 12:31:16 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_options
 
 // aglorithm
 void bubble(t_dll **stack1, t_dll **stack2, int len_stack1, t_options *options);
+float compute_disorder(t_dll **stack);
 
 // dubly linked list
 void free_dll(t_dll **head);

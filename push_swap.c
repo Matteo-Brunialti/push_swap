@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:31:03 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/15 22:43:10 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/16 12:31:33 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int argc, char *argv[])
 	while (--i > (0 + shift))
 		if (circular_dll_create_front_node(&stack1, is_int(argv[i])) == -1)
 			return (write(1, "Error\n", 6));
+	printf("disorder : %f\n", compute_disorder(&stack1));
 	if (options.adaptive)
 		printf("\n");
 		// do something with adaptive
