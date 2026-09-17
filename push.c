@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 11:15:25 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/16 17:12:50 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/17 12:03:43 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void	push_pa(t_dll **head1, t_dll **head2, t_options *options)
 		(options->pa)++;
 }
 
-void	push_pb(t_dll **head1, t_dll **head2, t_options *options)
+void	push_pb(t_dll **stack_a, t_dll **stack_b, t_options *options)
 {
-	push(head1, head2);
+	push(stack_b, stack_a);
 	write(1, "pb\n", 3);
 	if (options->bench)
 		(options->pb)++;

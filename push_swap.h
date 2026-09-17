@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:08:01 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/16 17:30:39 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/17 12:06:47 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_dll
 	struct s_dll	*next;
 	struct s_dll	*prev;
 	int				num;
+	int				rank;
 }					t_dll;
 
 // argument struct
@@ -49,10 +50,15 @@ typedef struct s_options
 }					t_options;
 
 // aglorithm
-void				smiple_bubble(t_dll **stack1, t_dll **stack2, int len_stack1,
-						t_options *options);
+void	simple_bubble(t_dll **stack1, t_dll **stack2, t_options *options,
+		int len_stack1);
+void	adaptive(t_dll **stack1, t_dll **stack2, t_options *options, int len_stack1);
+void medium_range_sort(t_dll **stack1, t_dll **stack2, t_options *options, int len_stack1);
+
+// utils_algorithm
+int 				my_sqrt(int num);
 float				compute_disorder(t_dll **stack);
-void	adaptive(t_dll **stack1, t_dll **stack2, int len_stack1, t_options *options);
+void set_rank(t_dll **stack, int len_stack);
 
 // dubly linked list
 void				free_dll(t_dll **head);
@@ -60,6 +66,7 @@ void				print_dll(t_dll **stack);
 int					is_sorted(t_dll *stack);
 int					circular_dll_create_front_node(t_dll **head, int num);
 void				reverse_print_dll(t_dll **stack);
+void	print_dll_rank(t_dll **stack);
 
 // swap
 void				swap_sa(t_dll **head, t_options *options);
@@ -68,7 +75,7 @@ void				swap_ss(t_dll **head1, t_dll **head2, t_options *options);
 
 // push
 void				push_pa(t_dll **head1, t_dll **head2, t_options *options);
-void				push_pb(t_dll **head1, t_dll **head2, t_options *options);
+void	push_pb(t_dll **stack_a, t_dll **stack_b, t_options *options);
 
 // rotate
 void				rotate_ra(t_dll **head, t_options *options);

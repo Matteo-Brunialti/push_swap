@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:31:03 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/16 17:31:41 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/17 12:21:20 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ int	main(int argc, char *argv[])
 	while (--i > (0 + shift))
 		if (circular_dll_create_front_node(&stack1, is_int(argv[i])) == -1)
 			return (write(1, "Error\n", 6));
-	printf("disorder : %f\n", compute_disorder(&stack1));
+	print_dll(&stack1);
+	set_rank(&stack1, argc - shift - 1);
+	print_dll_rank(&stack1);
 	if (options.adaptive)
-		adaptive(&stack1, &stack2, argc - shift - 1, &options);
+		adaptive(&stack1, &stack2, &options, argc - shift - 1);
 	else if (options.complex)
 		printf("\n");
 	// do complex algorithm
@@ -41,7 +43,7 @@ int	main(int argc, char *argv[])
 		printf("\n");
 	// do medium algorithm
 	else if (options.simple)
-		simple_bubble(&stack1, &stack2, argc - shift - 1, &options);
+		simple_bubble(&stack1, &stack2, &options, argc - shift - 1);
 	if (options.bench)
 		// so somthing with bench
 		return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doubly_linked_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:07:21 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/16 17:12:55 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/17 12:28:23 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	circular_dll_create_front_node(t_dll **head, int num)
 	new_node = (t_dll *)malloc(sizeof(t_dll));
 	if (!new_node)
 		return (-1);
+	new_node->rank = -1;
 	if ((*head) == NULL)
 	{
 		(*head) = new_node;
@@ -103,6 +104,21 @@ void	reverse_print_dll(t_dll **stack)
 	}
 	curr = curr->prev;
 	printf("%d\n", curr->num);
+}
+
+void	print_dll_rank(t_dll **stack)
+{
+	t_dll	*curr;
+
+	if ((*stack) == NULL)
+		return ;
+	curr = (*stack);
+	while (curr->next != (*stack))
+	{
+		printf("%d ", curr->rank);
+		curr = curr->next;
+	}
+	printf("%d\n", curr->rank);
 }
 
 int	is_sorted(t_dll *stack)
