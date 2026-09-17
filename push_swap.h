@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:08:01 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/16 17:15:43 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/16 17:30:39 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_options
 void				smiple_bubble(t_dll **stack1, t_dll **stack2, int len_stack1,
 						t_options *options);
 float				compute_disorder(t_dll **stack);
+void	adaptive(t_dll **stack1, t_dll **stack2, int len_stack1, t_options *options);
 
 // dubly linked list
 void				free_dll(t_dll **head);

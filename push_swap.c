@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:31:03 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/16 17:15:59 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/16 17:31:41 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ int	main(int argc, char *argv[])
 			return (write(1, "Error\n", 6));
 	printf("disorder : %f\n", compute_disorder(&stack1));
 	if (options.adaptive)
-		printf("\n");
-	// do something with adaptive
+		adaptive(&stack1, &stack2, argc - shift - 1, &options);
 	else if (options.complex)
 		printf("\n");
 	// do complex algorithm
