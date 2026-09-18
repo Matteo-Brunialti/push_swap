@@ -27,9 +27,9 @@ float	compute_disorder(t_dll **stack)
 	return ((float)mistakes / total_pairs);
 }
 
-int my_sqrt(int num)
+int	my_sqrt(int num)
 {
-	int i;
+	int	i;
 
 	if (num <= 0)
 		return (0);
@@ -41,26 +41,31 @@ int my_sqrt(int num)
 	return (i - 1);
 }
 
-void set_rank(t_dll **stack, int len_stack)
+void	set_rank(t_dll **stack, int len_stack)
 {
-	t_dll *curr;
-	t_dll *min;
-	int	i;
-	
+	t_dll	*curr;
+	t_dll	*min_node;
+	int		min_value;
+	int		i;
+
 	i = 0;
-	min = (*stack);
+	min_node = (*stack);
 	while (i < len_stack)
 	{
 		curr = (*stack);
-		while(curr->next != (*stack))
+		min_value = INT_MAX;
+		while (curr->next != (*stack))
 		{
-			if (curr->num < (min->num) && curr->rank < 0)
-				min = curr;
+			if (curr->num < min_value && curr->rank < 0)
+			{
+				min_node = curr;
+				min_value = min_node->num;
+			}
 			curr = curr->next;
 		}
-		if (curr->num < (min->num) && curr->rank < 0)
-			min = curr;
-		min->rank = i;
+		if (curr->num < min_value && curr->rank < 0)
+			min_node = curr;
+		min_node->rank = i;
 		i++;
 	}
 }

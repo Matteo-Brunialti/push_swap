@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 19:55:58 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/17 12:04:55 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/17 19:17:17 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	adaptive(t_dll **stack1, t_dll **stack2, t_options *options, int len_stack1
 	disorder = compute_disorder(stack1);
 	if (disorder < 0.2)
 		simple_bubble(stack1, stack2, options, len_stack1);
-	if (0.2 <= disorder < 0.5)
+	if (0.2 <= disorder && disorder < 0.5)
 		printf("in contrsuction");
 		//do something
 	if (disorder >= 0.5)
@@ -53,13 +53,17 @@ void	adaptive(t_dll **stack1, t_dll **stack2, t_options *options, int len_stack1
 
 void medium_range_sort(t_dll **stack1, t_dll **stack2, t_options *options, int len_stack1)
 {
-	int	range;
+	// int	range;
 
-	range = my_sqrt(len_stack1);
+	// range = my_sqrt(len_stack1);
 	set_rank(stack1, len_stack1);
 	set_rank(stack2, len_stack1);
 	push_pb(stack1, stack2, options);
-	
+	while (stack1)
+	{
+		
+	}
+		
 
 
 }

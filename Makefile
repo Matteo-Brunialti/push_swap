@@ -10,7 +10,8 @@ SRC		=	push_swap.c				\
 			reverse_rotate.c 		\
 			doubly_linked_list.c	\
 			validate_args.c			\
-			algorithm.c	
+			algorithm.c				\
+			utils_algorithm.c		
 
 OBJ		= $(SRC:.c=.o)
 
