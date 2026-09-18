@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 19:55:58 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/17 19:17:17 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/18 09:38:05 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,23 @@ void	adaptive(t_dll **stack1, t_dll **stack2, t_options *options, int len_stack1
 
 void medium_range_sort(t_dll **stack1, t_dll **stack2, t_options *options, int len_stack1)
 {
-	// int	range;
+	t_dll	*curr;
+	int		range;
+	int		i;
 
-	// range = my_sqrt(len_stack1);
 	set_rank(stack1, len_stack1);
-	set_rank(stack2, len_stack1);
-	push_pb(stack1, stack2, options);
+	range = my_sqrt(len_stack1);
+	i = 1;
+	curr = (*stack1);
 	while (stack1)
 	{
-		
+		if (0 < curr->rank && curr->rank < (range * ((i / range) + 1)))	
+		{
+			push_pa(stack1, stack2, options);
+			i++;
+		}
+		else
+			rotate_ra(stack1, options);
 	}
-		
-
-
+	// insert sort for range number until stack b is finished
 }

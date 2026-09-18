@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:38:46 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/17 10:06:11 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/18 09:01:50 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@
  * Error
  * 		LLONG_MIN is returned on error;
  */
-long long	is_int(char *str)
+long long is_int(char *str)
 {
-	long long	res;
-	int			sign;
-	int			i;
+	long long res;
+	int sign;
+	int i;
 
 	if (!str || !(*str))
 		return (LLONG_MIN);
@@ -50,8 +50,7 @@ long long	is_int(char *str)
 		i++;
 	}
 	res *= sign;
-	if (res > INT_MAX || res < INT_MIN || ((str[i] < '0' || str[i] > '9')
-			&& str[i] != '\0'))
+	if (res > INT_MAX || res < INT_MIN || ((str[i] < '0' || str[i] > '9') && str[i] != '\0'))
 		return (LLONG_MIN);
 	return (res);
 }
@@ -73,12 +72,12 @@ long long	is_int(char *str)
  * 			- integer outside the valid range
  * 			- duplicate values
  */
-static int	validate_int_args(int argc, char **argv, int shift)
+static int validate_int_args(int argc, char **argv, int shift)
 {
-	long long	tmp_i;
-	long long	tmp_j;
-	ssize_t		i;
-	ssize_t		j;
+	long long tmp_i;
+	long long tmp_j;
+	ssize_t i;
+	ssize_t j;
 
 	i = 1;
 	while (i < (argc - 1))
@@ -102,9 +101,9 @@ static int	validate_int_args(int argc, char **argv, int shift)
 	return (shift);
 }
 
-static bool	option_cmp(char *str, char *option)
+static bool option_cmp(char *str, char *option)
 {
-	ssize_t	i;
+	ssize_t i;
 
 	i = 0;
 	while (str[i] && option[i] && str[i] == option[i])
@@ -114,7 +113,7 @@ static bool	option_cmp(char *str, char *option)
 	return (false);
 }
 
-static void	set_options_to_false(t_options *options)
+static void set_options_to_false(t_options *options)
 {
 	options->simple = false;
 	options->medium = false;
@@ -140,11 +139,13 @@ static void	set_options_to_false(t_options *options)
  * true only if only 1 argument is given
  *
  */
-int	validate_args(t_options *options, int argc, char **argv)
+int validate_args(t_options *options, int argc, char **argv)
 {
-	int	shift;
+	int shift;
 
 	shift = 0;
+	if (argc == 2)
+		return (validate_int_args(argc, argv, shift));
 	set_options_to_false(options);
 	if (option_cmp(argv[1], "--simple") != option_cmp(argv[2], "--simple"))
 		options->simple = true;
@@ -153,7 +154,7 @@ int	validate_args(t_options *options, int argc, char **argv)
 	if (option_cmp(argv[1], "--complex") != option_cmp(argv[2], "--complex"))
 		options->complex = true;
 	if (!(option_cmp(argv[1], "--adaptive") || option_cmp(argv[2],
-				"--adaptive")))
+														  "--adaptive")))
 		options->adaptive = false;
 	if (option_cmp(argv[1], "--bench") != option_cmp(argv[2], "--bench"))
 		options->bench = true;

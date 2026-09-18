@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:08:01 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/17 17:34:05 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/18 12:51:50 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,8 @@ void				reverse_rotate_rrr(t_dll **head1, t_dll **head2,
 // validate_args.c
 int					validate_args(t_options *options, int argc, char **argv);
 long long			is_int(char *str);
+
+//benchmark
+int benchmark(t_options *options, float disorder_val);
 
 #endif
