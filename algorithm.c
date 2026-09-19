@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 19:55:58 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/18 09:38:05 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/19 16:17:08 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,46 @@ void	adaptive(t_dll **stack1, t_dll **stack2, t_options *options, int len_stack1
 		printf("in construction");
 		// put complex here
 }
+
+static int	get_max_bits(int max_val)
+{
+	int	max_bits;
+
+	max_bits = 0;
+	while ((max_val >> max_bits) != 0)
+		max_bits++;
+	return (max_bits);
+}
+
+void	  complex_radix(t_dll **stack1, t_dll **stack2, t_options *options,
+		int len_stack1)
+{
+	int	max_bits;
+	int	bit;
+	int	i;
+
+	if (len_stack1 <= 1)
+		return ;
+	set_rank(stack1, len_stack1);
+	max_bits = get_max_bits(len_stack1 - 1);
+	bit = 0;
+	while (bit < max_bits)
+	{
+		i = 0;
+		while (i < len_stack1)
+		{
+			if (((*stack1)->rank >> bit) & 1)
+				rotate_ra(stack1, options);
+			else
+				push_pb(stack1, stack2, options);
+			i++;
+		}
+		while (*stack2)
+			push_pa(stack2, stack1, options);
+		bit++;
+	}
+}
+
 
 void medium_range_sort(t_dll **stack1, t_dll **stack2, t_options *options, int len_stack1)
 {

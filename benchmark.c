@@ -28,9 +28,9 @@ static int	count_digit(int n)
 
 static char	*ft_itoa(int n)
 {
-	long long			long_n;
-	int					i;
-	char				*str;
+	long long	long_n;
+	int			i;
+	char		*str;
 
 	i = count_digit(n);
 	str = (char *)malloc(sizeof(char) * (i + 1));
@@ -55,7 +55,6 @@ static char	*ft_itoa(int n)
 	return (str);
 }
 
-
 static size_t	ft_strlen(char *s)
 {
 	size_t	i;
@@ -73,10 +72,14 @@ static char	*ft_strjoin(char *s1, char *s2)
 	char	*sjoined;
 
 	if (s1 == NULL || s2 == NULL)
-		return (NULL);
+		return (free(s1), free(s2), NULL);
 	sjoined = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!sjoined)
+	{
+		free(s1);
+		free(s2);
 		return (NULL);
+	}
 	i = 0;
 	while (s1[i])
 	{
@@ -95,63 +98,98 @@ static char	*ft_strjoin(char *s1, char *s2)
 	return (sjoined);
 }
 
-static char *disorder(float disorder_val)
+static char	*sos(char *s1)
 {
-	int	i;
+	char	*seallocata;
+	size_t	i;
 
+	if (!s1)
+		return (NULL);
+	seallocata = malloc(sizeof(char) * ft_strlen(s1) + 1);
+	if (!seallocata)
+		return (NULL);
 	i = 0;
-	char percent[6];
-	while (i < 4)
+	while (s1[i])
 	{
-		disorder_val = disorder_val * 10;
-		percent[i] = '0' - (disorder_val / 10);	
+		seallocata[i] = s1[i];
+		i++;
 	}
-	percent[4] = '%';
-	percent[5] = '\0';
-	return	(ft_strjoin("[bench] disorder: ", &percent[6]));
+	seallocata[i] = '\0';
+	return (seallocata);
 }
 
-static char *strategy(t_options *options, float disorder)
+static char	*disorder(float disorder_val)
+{
+	char	*percent;
+	int		disorder_val_int;
+
+	percent = malloc(sizeof(char) * 7);
+	if (!percent)
+		return (NULL);
+	disorder_val_int = (int)(disorder_val * 10000);
+	percent[4] = '0' + disorder_val_int % 10;
+	disorder_val_int /= 10;
+	percent[3] = '0' + disorder_val_int % 10;
+	disorder_val_int /= 10;
+	percent[1] = '0' + disorder_val_int % 10;
+	disorder_val_int /= 10;
+	percent[0] = '0' + disorder_val_int % 10;
+	disorder_val_int /= 10;
+	percent[2] = '.';
+	percent[5] = '%';
+	percent[6] = '\0';
+	return (ft_strjoin(sos("[bench] disorder: "), percent));
+}
+
+static char	*strategy(t_options *options, float disorder)
 {
 	if (options->adaptive)
 	{
 		if (disorder < 0.2)
-			return (ft_strjoin("\n[bench] strategy: Adaptive / O(n2)\n", ""));
+			return (ft_strjoin(sos("\n[bench] strategy: Adaptive / O(n2)\n"),
+					sos("")));
 		if (0.2 <= disorder && disorder < 0.5)
-			return (ft_strjoin("\n[bench] strategy: Adaptive / O(n√n)\n", ""));
+			return (ft_strjoin(sos("\n[bench] strategy: Adaptive / O(n√n)\n"),
+					sos("")));
 		if (disorder >= 0.5)
-			return (ft_strjoin("\n[bench] strategy: Adaptive / O(n log n)\n", ""));
+			return (ft_strjoin(sos("\n[bench] strategy: Adaptive "
+									"/ O(n log n)\n"),
+								sos("")));
 	}
 	else if (options->complex)
-		return (ft_strjoin("\n[bench] strategy: Complex / O(n log n)\n", ""));
+		return (ft_strjoin(sos("\n[bench] strategy: Complex / O(n log n)\n"),
+				sos("")));
 	else if (options->medium)
-		return (ft_strjoin("\n[bench] strategy: Medium / O(n√n)\n", ""));
+		return (ft_strjoin(sos("\n[bench] strategy: Medium / O(n√n)\n"),
+				sos("")));
 	else if (options->simple)
-		return (ft_strjoin("\n[bench] simple: Simple /  O(n2)\n", ""));
+		return (ft_strjoin(sos("\n[bench] simple: Simple /  O(n2)\n"),
+				sos("")));
 	return (NULL);
 }
 
-static char *operations(t_options *options)
+static char	*operations(t_options *options)
 {
 	char	*line;
 
-	line = ft_strjoin("[bench] sa: ", ft_itoa(options->sa));
-	line = ft_strjoin(line, ft_strjoin(" sb: ", ft_itoa(options->sb)));
-	line = ft_strjoin(line, ft_strjoin(" ss: ", ft_itoa(options->ss)));
-	line = ft_strjoin(line, ft_strjoin(" sb: ", ft_itoa(options->sb)));
-	line = ft_strjoin(line, ft_strjoin(" pa: ", ft_itoa(options->pa)));
-	line = ft_strjoin(line, ft_strjoin(" pb: ", ft_itoa(options->pb)));
-	line = ft_strjoin(line, ft_strjoin("\n [bench] ra: ", ft_itoa(options->ra)));
-	line = ft_strjoin(line, ft_strjoin(" rb: ", ft_itoa(options->rb)));
-	line = ft_strjoin(line, ft_strjoin(" rr: ", ft_itoa(options->rr)));
-	line = ft_strjoin(line, ft_strjoin(" rra: ", ft_itoa(options->rra)));
-	line = ft_strjoin(line, ft_strjoin(" rrb: ", ft_itoa(options->rrb)));
-	line = ft_strjoin(line, ft_strjoin(" rrr: ", ft_itoa(options->rrr)));
-	line = ft_strjoin(line, "\n");
+	line = ft_strjoin(sos("[bench] sa: "), ft_itoa(options->sa));
+	line = ft_strjoin(line, ft_strjoin(sos(" sb: "), ft_itoa(options->sb)));
+	line = ft_strjoin(line, ft_strjoin(sos(" ss: "), ft_itoa(options->ss)));
+	line = ft_strjoin(line, ft_strjoin(sos(" sb: "), ft_itoa(options->sb)));
+	line = ft_strjoin(line, ft_strjoin(sos(" pa: "), ft_itoa(options->pa)));
+	line = ft_strjoin(line, ft_strjoin(sos(" pb: "), ft_itoa(options->pb)));
+	line = ft_strjoin(line, ft_strjoin(sos("\n[bench] ra: "),
+				ft_itoa(options->ra)));
+	line = ft_strjoin(line, ft_strjoin(sos(" rb: "), ft_itoa(options->rb)));
+	line = ft_strjoin(line, ft_strjoin(sos(" rr: "), ft_itoa(options->rr)));
+	line = ft_strjoin(line, ft_strjoin(sos(" rra: "), ft_itoa(options->rra)));
+	line = ft_strjoin(line, ft_strjoin(sos(" rrb: "), ft_itoa(options->rrb)));
+	line = ft_strjoin(line, ft_strjoin(sos(" rrr: "), ft_itoa(options->rrr)));
+	line = ft_strjoin(line, sos("\n"));
 	return (line);
 }
 
-static char *operations_total_ops(t_options *options)
+static char	*operations_total_ops(t_options *options)
 {
 	int		tot;
 	char	*total_ops;
@@ -168,12 +206,12 @@ static char *operations_total_ops(t_options *options)
 	tot += options->rra;
 	tot += options->rrb;
 	tot += options->rrr;
-	total_ops = ft_strjoin("[bench] total_ops: ", ft_itoa(tot));
-	total_ops = ft_strjoin(total_ops, "\n");
+	total_ops = ft_strjoin(sos("[bench] total_ops: "), ft_itoa(tot));
+	total_ops = ft_strjoin(total_ops, sos("\n"));
 	return (total_ops);
 }
 
-int benchmark(t_options *options, float disorder_val)
+int	benchmark(t_options *options, float disorder_val)
 {
 	char	*final;
 	int		i;
@@ -188,5 +226,5 @@ int benchmark(t_options *options, float disorder_val)
 	while (final[i])
 		i++;
 	write(2, final, i);
-	return(0);
+	return (0);
 }

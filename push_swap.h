@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:08:01 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/18 12:51:50 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/19 16:18:54 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void				adaptive(t_dll **stack1, t_dll **stack2, t_options *options,
 						int len_stack1);
 void				medium_range_sort(t_dll **stack1, t_dll **stack2,
 						t_options *options, int len_stack1);
-
+void				complex_radix(t_dll **stack1, t_dll **stack2,
+						t_options *options, int len_stack1);
 // utils_algorithm
 int					my_sqrt(int num);
 float				compute_disorder(t_dll **stack);
@@ -95,7 +96,7 @@ void				reverse_rotate_rrr(t_dll **head1, t_dll **head2,
 int					validate_args(t_options *options, int argc, char **argv);
 long long			is_int(char *str);
 
-//benchmark
-int benchmark(t_options *options, float disorder_val);
+// benchmark
+int					benchmark(t_options *options, float disorder_val);
 
 #endif

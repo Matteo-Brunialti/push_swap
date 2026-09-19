@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:31:03 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/18 13:09:40 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/19 16:19:49 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ int	main(int argc, char *argv[])
 	if (options.adaptive)
 		adaptive(&stack1, &stack2, &options, argc - shift - 1);
 	else if (options.complex)
-		printf("\n");
-	// do complex algorithm
+		complex_radix(&stack1, &stack2, &options, argc - shift - 1);
 	else if (options.medium)
 		printf("\n");
 	// do medium algorithm
