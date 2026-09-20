@@ -36,8 +36,6 @@ int	my_sqrt(int num)
 	i = 1;
 	while (i <= (num / i))
 		i++;
-	if ((i * i) == num)
-		return (i);
 	return (i - 1);
 }
 

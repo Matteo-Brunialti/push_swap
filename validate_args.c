@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:38:46 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/18 09:01:50 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/20 11:12:59 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,7 @@ int validate_args(t_options *options, int argc, char **argv)
 		options->medium = true;
 	if (option_cmp(argv[1], "--complex") != option_cmp(argv[2], "--complex"))
 		options->complex = true;
-	if (!(option_cmp(argv[1], "--adaptive") || option_cmp(argv[2],
-														  "--adaptive")))
+	if (options->simple || options->medium || options->complex)
 		options->adaptive = false;
 	if (option_cmp(argv[1], "--bench") != option_cmp(argv[2], "--bench"))
 		options->bench = true;

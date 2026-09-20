@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 19:55:58 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/19 16:24:28 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/20 12:39:05 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,23 @@ void	simple_bubble(t_dll **stack1, t_dll **stack2, t_options *options,
 				swap_sb(stack2, options);
 			rotate_rb(stack2, options);
 		}
-		push_pa(stack2, stack1, options);
+		push_pa(stack1, stack2, options);
 	}
 }
 
-void	adaptive(t_dll **stack1, t_dll **stack2, t_options *options, int len_stack1)
+void	adaptive(t_dll **stack1, t_dll **stack2, t_options *options,
+		int len_stack1)
 {
-	float disorder;
+	float	disorder;
 
 	disorder = compute_disorder(stack1);
 	if (disorder < 0.2)
 		simple_bubble(stack1, stack2, options, len_stack1);
 	if (0.2 <= disorder && disorder < 0.5)
 		printf("in contrsuction");
-		//do something
+	// do something
 	if (disorder >= 0.5)
-		printf("in construction");
-		// put complex here
+		complex_radix(stack1, stack2, options, len_stack1);
 }
 
 static int	get_max_bits(int max_val)
@@ -61,7 +61,7 @@ static int	get_max_bits(int max_val)
 	return (max_bits);
 }
 
-void	  complex_radix(t_dll **stack1, t_dll **stack2, t_options *options,
+void	complex_radix(t_dll **stack1, t_dll **stack2, t_options *options,
 		int len_stack1)
 {
 	int	max_bits;
@@ -70,7 +70,6 @@ void	  complex_radix(t_dll **stack1, t_dll **stack2, t_options *options,
 
 	if (len_stack1 <= 1)
 		return ;
-	set_rank(stack1, len_stack1);
 	max_bits = get_max_bits(len_stack1 - 1);
 	bit = 0;
 	while (bit < max_bits)
@@ -90,26 +89,68 @@ void	  complex_radix(t_dll **stack1, t_dll **stack2, t_options *options,
 	}
 }
 
+static	rotate_j_times(t_dll **stack, int j)
+{
 
-void medium_range_sort(t_dll **stack1, t_dll **stack2, t_options *options, int len_stack1)
+} 
+
+static	reverse_rotate_j_times(t_dll **stack, int j)
+{
+
+}
+
+static void	range_sort_sorting(t_dll **stack1, t_dll **stack2, t_options *options,
+		int len_stack2)
+{
+	t_dll	*curr;
+	int		i;
+	int		j;
+	int		range;
+	int		max_rank;
+
+	range = my_sqrt(len_stack2);
+	max_rank = len_stack2 - 1;
+	while (stack2)
+	{
+		curr = (*stack2);
+		j = 0;
+		while (j < len_stack2)
+		{
+			if (curr->rank == max_rank)	
+			{
+				if (j <= (len_stack2 / 2))
+					rotate_j_times(stack2, j);
+				else
+					reverse_rotate_j_times(stack2, len_stack2 - j);
+				max_rank--;
+				j = len_stack2;
+			}
+			curr = curr->next;
+			j++;
+		}
+		i++;
+	}
+}
+
+void	medium_range_sort(t_dll **stack1, t_dll **stack2, t_options *options,
+		int len_stack1)
 {
 	t_dll	*curr;
 	int		range;
 	int		i;
 
-	set_rank(stack1, len_stack1);
 	range = my_sqrt(len_stack1);
-	i = 1;
-	curr = (*stack1);
-	while (stack1)
+	i = 0;
+	while (*stack1)
 	{
-		if (0 < curr->rank && curr->rank < (range * ((i / range) + 1)))	
+		curr = (*stack1);
+		if (curr->rank < (range * ((i / range) + 1)))
 		{
-			push_pa(stack1, stack2, options);
+			push_pb(stack1, stack2, options);
 			i++;
 		}
 		else
 			rotate_ra(stack1, options);
 	}
-	// insert sort for range number until stack b is finished
+	print_dll(stack2);
 }

@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:31:03 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/19 16:19:49 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/20 11:36:46 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,19 @@ int	main(int argc, char *argv[])
 			return (write(1, "Error\n", 6));
 	set_rank(&stack1, argc - shift - 1);
 	disorder = compute_disorder(&stack1);
+	print_dll(&stack1);
+	printf("below are the rank :\n");
+	print_dll_rank(&stack1);
 	if (options.adaptive)
 		adaptive(&stack1, &stack2, &options, argc - shift - 1);
 	else if (options.complex)
 		complex_radix(&stack1, &stack2, &options, argc - shift - 1);
 	else if (options.medium)
-		printf("\n");
-	// do medium algorithm
+		medium_range_sort(&stack1, &stack2, &options, argc - shift -1);
 	else if (options.simple)
 		simple_bubble(&stack1, &stack2, &options, argc - shift - 1);
 	if (options.bench)
 		benchmark(&options, disorder);
+	print_dll(&stack1);
 	return (0);
 }
