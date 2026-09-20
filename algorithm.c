@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 19:55:58 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/19 16:17:08 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/19 16:24:28 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	  complex_radix(t_dll **stack1, t_dll **stack2, t_options *options,
 			i++;
 		}
 		while (*stack2)
-			push_pa(stack2, stack1, options);
+			push_pa(stack1, stack2, options);
 		bit++;
 	}
 }

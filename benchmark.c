@@ -118,27 +118,41 @@ static char	*sos(char *s1)
 	return (seallocata);
 }
 
+static void	fill_percent(char *p, int disorder_value_int)
+{
+	if (disorder_value_int >= 10000)
+	{
+		p[0] = '1';
+		p[1] = '0';
+		p[2] = '0';
+		p[3] = '%';
+		p[4] = '\0';
+	}
+	else
+	{
+		p[0] = disorder_value_int / 1000 + '0';
+		p[1] = disorder_value_int / 100 % 10 + '0';
+		p[2] = '.';
+		p[3] = disorder_value_int / 10 % 10 + '0';
+		p[4] = disorder_value_int % 10 + '0';
+		p[5] = '%';
+		p[6] = '\0';
+	}
+}
+
 static char	*disorder(float disorder_val)
 {
 	char	*percent;
-	int		disorder_val_int;
+	char	*result;
+	int		disorder_value_int;
 
-	percent = malloc(sizeof(char) * 7);
+	percent = malloc(8);
 	if (!percent)
 		return (NULL);
-	disorder_val_int = (int)(disorder_val * 10000);
-	percent[4] = '0' + disorder_val_int % 10;
-	disorder_val_int /= 10;
-	percent[3] = '0' + disorder_val_int % 10;
-	disorder_val_int /= 10;
-	percent[1] = '0' + disorder_val_int % 10;
-	disorder_val_int /= 10;
-	percent[0] = '0' + disorder_val_int % 10;
-	disorder_val_int /= 10;
-	percent[2] = '.';
-	percent[5] = '%';
-	percent[6] = '\0';
-	return (ft_strjoin(sos("[bench] disorder: "), percent));
+	disorder_value_int = (int)(disorder_val * 10000);
+	fill_percent(percent, disorder_value_int);
+	result = ft_strjoin(sos("[bench] disorder: "), percent);
+	return (result);
 }
 
 static char	*strategy(t_options *options, float disorder)
