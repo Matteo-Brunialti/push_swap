@@ -6,13 +6,12 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:08:01 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/19 16:18:54 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/21 09:34:50 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#if !defined PUSH_SWAP
-# define PUSH_SWAP
-
+#if !defined PUSH_SWAP_H
+# define PUSH_SWAP_H
 # include <limits.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -62,6 +61,8 @@ void				complex_radix(t_dll **stack1, t_dll **stack2,
 int					my_sqrt(int num);
 float				compute_disorder(t_dll **stack);
 void				set_rank(t_dll **stack, int len_stack);
+void				range_sort_sorting(t_dll **stack1, t_dll **stack2,
+						t_options *options, int len_stack2);
 
 // dubly linked list
 void				free_dll(t_dll **head);
@@ -98,5 +99,16 @@ long long			is_int(char *str);
 
 // benchmark
 int					benchmark(t_options *options, float disorder_val);
+
+// benchmark_utils.c
+
+int					count_digit(int n);
+char				*ft_itoa(int n);
+size_t				ft_strlen(char *s);
+char				*ft_strjoin(char *s1, char *s2);
+char				*sos(char *s1);
+
+// benchmark_utils2.c
+char				*operations(t_options *options);
 
 #endif

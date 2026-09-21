@@ -12,7 +12,9 @@ SRC		=	push_swap.c				\
 			validate_args.c			\
 			algorithm.c				\
 			utils_algorithm.c		\
-			benchmark.c
+			benchmark.c				\
+			benchmark_utils.c		\
+			benchmark_utils2.c	
 
 OBJ		= $(SRC:.c=.o)
 

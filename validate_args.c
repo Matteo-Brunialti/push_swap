@@ -6,78 +6,18 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:38:46 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/20 11:12:59 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/21 09:42:45 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/* The function is_int(char *str) check if a string is a valid int and return
- *	long long min on error
- *
- * Only string to int format accepted is:
- * 	|---------------|--------------|
- * 	|1 optional sign|valid int char|
- * 	|---------------|--------------|
- *
- * Return values:
- * 		Return a long long in the int range (from INT_MIN to INT_MAX)
- *
- * Error
- * 		LLONG_MIN is returned on error;
- */
-long long is_int(char *str)
+static int	validate_int_args(int argc, char **argv, int shift)
 {
-	long long res;
-	int sign;
-	int i;
-
-	if (!str || !(*str))
-		return (LLONG_MIN);
-	sign = 1;
-	i = 0;
-	if (str[i] == '+')
-		i++;
-	if (str[i] == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	res = 0;
-	while (str[i] >= '0' && str[i] <= '9' && i < 11)
-	{
-		res = (res * 10) + (str[i] - '0');
-		i++;
-	}
-	res *= sign;
-	if (res > INT_MAX || res < INT_MIN || ((str[i] < '0' || str[i] > '9') && str[i] != '\0'))
-		return (LLONG_MIN);
-	return (res);
-}
-
-/* THIS COMMENT IS NOT UPDATED PLS DONT REFER TO IT FOR COMPLETE INFO.
- * The function validate_int_args(int argc,
-	char **argv) takes the argument passed
- * 	to the program and check if they are valid for the 42 push_swap project.
- * It is assumes that at least 1 parameter was passed, no argument are checked
- * 	at the main level.
- *
- * Every arguemnt is first check if valid integer then if it is duplicate
- *
- *
- * Error:
- * 		A -1 is returned if an invalid argument is provided.
- * 		List of invalid argument:
- * 			- arguments that are not integers
- * 			- integer outside the valid range
- * 			- duplicate values
- */
-static int validate_int_args(int argc, char **argv, int shift)
-{
-	long long tmp_i;
-	long long tmp_j;
-	ssize_t i;
-	ssize_t j;
+	long long	tmp_i;
+	long long	tmp_j;
+	ssize_t		i;
+	ssize_t		j;
 
 	i = 1;
 	while (i < (argc - 1))
@@ -101,9 +41,9 @@ static int validate_int_args(int argc, char **argv, int shift)
 	return (shift);
 }
 
-static bool option_cmp(char *str, char *option)
+static bool	option_cmp(char *str, char *option)
 {
-	ssize_t i;
+	ssize_t	i;
 
 	i = 0;
 	while (str[i] && option[i] && str[i] == option[i])
@@ -113,7 +53,7 @@ static bool option_cmp(char *str, char *option)
 	return (false);
 }
 
-static void set_options_to_false(t_options *options)
+static void	set_options_to_false(t_options *options)
 {
 	options->simple = false;
 	options->medium = false;
@@ -132,6 +72,21 @@ static void set_options_to_false(t_options *options)
 	options->rrb = 0;
 	options->rrr = 0;
 }
+
+static	void	set_shift(t_options *options, int *shift)
+{
+	if (options->simple)
+		(*shift)++;
+	if (options->medium)
+		(*shift)++;
+	if (options->complex)
+		(*shift)++;
+	if (options->adaptive)
+		(*shift)++;
+	if (options->bench)
+		(*shift)++;
+}
+
 /*
  * AO: this function assume argc and atgv has 3 argument in it
  * the program name and at least 2 argument let them be number  or option
@@ -139,9 +94,9 @@ static void set_options_to_false(t_options *options)
  * true only if only 1 argument is given
  *
  */
-int validate_args(t_options *options, int argc, char **argv)
+int	validate_args(t_options *options, int argc, char **argv)
 {
-	int shift;
+	int	shift;
 
 	shift = 0;
 	if (argc == 2)
@@ -157,15 +112,6 @@ int validate_args(t_options *options, int argc, char **argv)
 		options->adaptive = false;
 	if (option_cmp(argv[1], "--bench") != option_cmp(argv[2], "--bench"))
 		options->bench = true;
-	if (options->simple)
-		shift++;
-	if (options->medium)
-		shift++;
-	if (options->complex)
-		shift++;
-	if (options->adaptive)
-		shift++;
-	if (options->bench)
-		shift++;
+	set_shift(options, &shift);
 	return (validate_int_args(argc - shift, argv + shift, shift));
 }

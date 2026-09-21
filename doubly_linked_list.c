@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   doubly_linked_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrunial <mbrunial@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:07:21 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/17 12:28:23 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/21 08:58:57 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/* The void	free_dll(t_dll **head) is a helper function that free a doubly linked
- * 	list
+/* The void	free_dll(t_dll **head) is a helper function that free a doubly
+ * 	linked list
  *
  * head and it's value (*head) are checked for NULL
  */
@@ -75,6 +75,11 @@ int	circular_dll_create_front_node(t_dll **head, int num)
 	return (0);
 }
 
+/* 
+ * those are helper function used for debugging and visualization, not usefull
+ * 	for the actual project
+ 
+ 
 void	print_dll(t_dll **stack)
 {
 	t_dll	*curr;
@@ -141,3 +146,4 @@ int	is_sorted(t_dll *stack)
 
 	return (0);
 }
+*/

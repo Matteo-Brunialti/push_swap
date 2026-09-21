@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 19:55:58 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/20 12:39:05 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/21 09:01:12 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ void	adaptive(t_dll **stack1, t_dll **stack2, t_options *options,
 	if (disorder < 0.2)
 		simple_bubble(stack1, stack2, options, len_stack1);
 	if (0.2 <= disorder && disorder < 0.5)
-		printf("in contrsuction");
-	// do something
+		medium_range_sort(stack1, stack2, options, len_stack1);
 	if (disorder >= 0.5)
 		complex_radix(stack1, stack2, options, len_stack1);
 }
@@ -89,49 +88,6 @@ void	complex_radix(t_dll **stack1, t_dll **stack2, t_options *options,
 	}
 }
 
-static	rotate_j_times(t_dll **stack, int j)
-{
-
-} 
-
-static	reverse_rotate_j_times(t_dll **stack, int j)
-{
-
-}
-
-static void	range_sort_sorting(t_dll **stack1, t_dll **stack2, t_options *options,
-		int len_stack2)
-{
-	t_dll	*curr;
-	int		i;
-	int		j;
-	int		range;
-	int		max_rank;
-
-	range = my_sqrt(len_stack2);
-	max_rank = len_stack2 - 1;
-	while (stack2)
-	{
-		curr = (*stack2);
-		j = 0;
-		while (j < len_stack2)
-		{
-			if (curr->rank == max_rank)	
-			{
-				if (j <= (len_stack2 / 2))
-					rotate_j_times(stack2, j);
-				else
-					reverse_rotate_j_times(stack2, len_stack2 - j);
-				max_rank--;
-				j = len_stack2;
-			}
-			curr = curr->next;
-			j++;
-		}
-		i++;
-	}
-}
-
 void	medium_range_sort(t_dll **stack1, t_dll **stack2, t_options *options,
 		int len_stack1)
 {
@@ -152,5 +108,5 @@ void	medium_range_sort(t_dll **stack1, t_dll **stack2, t_options *options,
 		else
 			rotate_ra(stack1, options);
 	}
-	print_dll(stack2);
+	range_sort_sorting(stack1, stack2, options, len_stack1);
 }

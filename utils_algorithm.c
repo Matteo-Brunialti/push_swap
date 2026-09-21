@@ -1,31 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_algorithm.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/21 08:56:50 by mbrunial          #+#    #+#             */
+/*   Updated: 2026/09/21 09:03:41 by mbrunial         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
-
-float	compute_disorder(t_dll **stack)
-{
-	t_dll	*curr_i;
-	t_dll	*curr_j;
-	int		mistakes;
-	int		total_pairs;
-
-	if (!(*stack))
-		return (-1);
-	curr_i = (*stack);
-	mistakes = 0;
-	total_pairs = 0;
-	while (curr_i->next != (*stack))
-	{
-		curr_j = curr_i->next;
-		while (curr_j != (*stack))
-		{
-			total_pairs++;
-			if (curr_i->num > curr_j->num)
-				mistakes++;
-			curr_j = curr_j->next;
-		}
-		curr_i = curr_i->next;
-	}
-	return ((float)mistakes / total_pairs);
-}
 
 int	my_sqrt(int num)
 {
@@ -65,5 +50,57 @@ void	set_rank(t_dll **stack, int len_stack)
 			min_node = curr;
 		min_node->rank = i;
 		i++;
+	}
+}
+
+static void	rotate_i_times(t_dll **stack1, t_dll **stack2, t_options *options,
+		int i)
+{
+	while (i <= 0)
+	{
+		rotate_rb(stack2, options);
+		i--;
+	}
+	push_pa(stack1, stack2, options);
+}
+
+static void	reverse_rotate_i_times(t_dll **stack1, t_dll **stack2,
+		t_options *options, int i)
+{
+	while (i <= 0)
+	{
+		reverse_rotate_rb(stack2, options);
+		i--;
+	}
+	push_pa(stack1, stack2, options);
+}
+
+void	range_sort_sorting(t_dll **stack1, t_dll **stack2,
+		t_options *options, int len_stack2)
+{
+	t_dll	*curr;
+	int		i;
+	int		max_rank;
+
+	max_rank = len_stack2 - 1;
+	while (stack2)
+	{
+		curr = (*stack2);
+		i = 0;
+		while (i < (max_rank + 1))
+		{
+			if (curr->rank == max_rank)
+			{
+				if (i <= (len_stack2 / 2))
+					rotate_i_times(stack1, stack2, options, i);
+				else
+					reverse_rotate_i_times(stack1, stack2, options, len_stack2
+						- i);
+				max_rank--;
+				i = len_stack2;
+			}
+			curr = curr->next;
+			i++;
+		}
 	}
 }
