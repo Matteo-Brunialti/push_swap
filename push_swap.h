@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:08:01 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/21 09:34:50 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/21 09:53:31 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_options
 	int				rra;
 	int				rrb;
 	int				rrr;
+	float			disorder;
 }					t_options;
 
 // aglorithm

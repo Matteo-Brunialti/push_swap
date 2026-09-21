@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:31:03 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/21 09:35:55 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/21 10:05:55 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ float	compute_disorder(t_dll **stack)
 	int		mistakes;
 	int		total_pairs;
 
-	if (!(*stack))
-		return (-1);
+	if (!(*stack) || !stack || (*stack)->next == (*stack))
+		return (0.0f);
 	curr_i = (*stack);
 	mistakes = 0;
 	total_pairs = 0;
@@ -85,9 +85,6 @@ float	compute_disorder(t_dll **stack)
 static void	select_algorithm(t_dll **stack1, t_dll **stack2, t_options *options,
 		int len_stack1)
 {
-	int	disorder;
-
-	disorder = compute_disorder(stack1);
 	if (options->adaptive)
 		adaptive(stack1, stack2, options, len_stack1);
 	else if (options->complex)
@@ -97,7 +94,7 @@ static void	select_algorithm(t_dll **stack1, t_dll **stack2, t_options *options,
 	else if (options->simple)
 		simple_bubble(stack1, stack2, options, len_stack1);
 	if (options->bench)
-		benchmark(options, disorder);
+		benchmark(options, options->disorder);
 }
 
 int	main(int argc, char *argv[])
@@ -120,6 +117,7 @@ int	main(int argc, char *argv[])
 		if (circular_dll_create_front_node(&stack1, is_int(argv[i])) == -1)
 			return (write(1, "Error\n", 6));
 	set_rank(&stack1, argc - shift - 1);
+	options.disorder = compute_disorder(&stack1);
 	select_algorithm(&stack1, &stack2, &options, argc - shift - 1);
 	return (0);
 }

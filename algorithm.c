@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 19:55:58 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/21 09:01:12 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/21 09:53:56 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	adaptive(t_dll **stack1, t_dll **stack2, t_options *options,
 {
 	float	disorder;
 
-	disorder = compute_disorder(stack1);
+	disorder = options->disorder;
 	if (disorder < 0.2)
 		simple_bubble(stack1, stack2, options, len_stack1);
 	if (0.2 <= disorder && disorder < 0.5)
