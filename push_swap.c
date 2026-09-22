@@ -6,29 +6,18 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:31:03 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/22 02:19:47 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/22 03:53:49 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long long	is_int(char *str)
+static long long	get_int(char *str, int i, int sign)
 {
 	long long	res;
-	int			sign;
-	int			i;
 
-	if (!str || !(*str))
-		return (LLONG_MIN);
-	sign = 0;
-	i = 0;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		sign = str[i] == '-';
-		i++;
-	}
 	res = 0;
-	while (str[i] >= '0' && str[i] <= '9' && i < 11)
+	while (str[i] >= '0' && str[i] <= '9' && i < 12)
 	{
 		res = (res * 10) + (str[i] - '0');
 		i++;
@@ -41,12 +30,33 @@ long long	is_int(char *str)
 	return (res);
 }
 
+long long	is_int(char *str)
+{
+	int	sign;
+	int	i;
+
+	if (!str || !(*str))
+		return (LLONG_MIN);
+	sign = 0;
+	i = 0;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		sign = str[i] == '-';
+		i++;
+	}
+	if (str[i] < '0' || str[i] > '9')
+		return (LLONG_MIN);
+	if (str[i] == '0' && str[i + 1] != '\0')
+		return (LLONG_MIN);
+	return (get_int(str, i, sign));
+}
+
 float	compute_disorder(t_dll **stack)
 {
-	t_dll	*curr_i;
-	t_dll	*curr_j;
-	int		mistakes;
-	int		total_pairs;
+	t_dll				*curr_i;
+	t_dll				*curr_j;
+	unsigned long long	mistakes;
+	unsigned long long	total_pairs;
 
 	if (!stack || !(*stack) || (*stack)->next == (*stack))
 		return (0.0);
@@ -115,5 +125,6 @@ int	main(int argc, char *argv[])
 		}
 	}
 	select_algorithm(&stack1, &stack2, &options, argc - shift - 1);
+	free_dll(&stack1);
 	return (0);
 }

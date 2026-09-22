@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 09:05:26 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/22 01:37:43 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/22 03:55:14 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ static char	*strategy(t_options *options, float disorder)
 
 static char	*operations_total_ops(t_options *options)
 {
-	int		tot;
-	char	*total_ops;
+	unsigned long long	tot;
+	char				*total_ops;
 
 	tot = 0;
 	tot += options->sa;
