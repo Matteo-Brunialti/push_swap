@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 12:05:38 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/21 08:44:11 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/21 23:22:46 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	reverse_rotate_rrr(t_dll **head1, t_dll **head2, t_options *options)
 {
 	reverse_rotate(head1);
 	reverse_rotate(head2);
-	write(1, "rrr\n", 3);
+	write(1, "rrr\n", 4);
 	if (options->bench)
 		(options->rrr)++;
 }

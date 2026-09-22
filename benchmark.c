@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 09:05:26 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/21 09:30:28 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/22 01:37:43 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,32 @@
  * present.
  */
 
-static void	fill_percent(char *p, int disorder_value_int)
+static void	fill_percent(char *p, int value)
 {
-	if (disorder_value_int >= 10000)
+	int	i;
+
+	i = 0;
+	if (value >= 10000)
 	{
-		p[0] = '1';
-		p[1] = '0';
-		p[2] = '0';
-		p[3] = '%';
-		p[4] = '\0';
+		p[i] = '1';
+		i++;
 	}
-	else
+	if (value >= 1000)
 	{
-		p[0] = disorder_value_int / 1000 + '0';
-		p[1] = disorder_value_int / 100 % 10 + '0';
-		p[2] = '.';
-		p[3] = disorder_value_int / 10 % 10 + '0';
-		p[4] = disorder_value_int % 10 + '0';
-		p[5] = '%';
-		p[6] = '\0';
+		p[i] = value / 1000 % 10 + '0';
+		i++;
 	}
+	p[i] = value / 100 % 10 + '0';
+	i++;
+	p[i] = '.';
+	i++;
+	p[i] = value / 10 % 10 + '0';
+	i++;
+	p[i] = value % 10 + '0';
+	i++;
+	p[i] = '%';
+	i++;
+	p[i] = '\0';
 }
 
 static char	*disorder(float disorder_val)
@@ -54,7 +60,7 @@ static char	*disorder(float disorder_val)
 	percent = malloc(8);
 	if (!percent)
 		return (NULL);
-	disorder_value_int = (int)(disorder_val * 10000);
+	disorder_value_int = (int)(disorder_val * 10000 + 0.5);
 	fill_percent(percent, disorder_value_int);
 	result = ft_strjoin(sos("[bench] disorder: "), percent);
 	return (result);
@@ -81,7 +87,7 @@ static char	*strategy(t_options *options, float disorder)
 		return (ft_strjoin(sos("\n[bench] strategy: Medium / O(n√n)\n"),
 				sos("")));
 	else if (options->simple)
-		return (ft_strjoin(sos("\n[bench] simple: Simple /  O(n2)\n"),
+		return (ft_strjoin(sos("\n[bench] strategy: Simple /  O(n2)\n"),
 				sos("")));
 	return (NULL);
 }
@@ -111,7 +117,7 @@ static char	*operations_total_ops(t_options *options)
 int	benchmark(t_options *options, float disorder_val)
 {
 	char	*final;
-	int		i;
+	ssize_t	len;
 
 	final = disorder(disorder_val);
 	final = ft_strjoin(final, strategy(options, disorder_val));
@@ -119,9 +125,8 @@ int	benchmark(t_options *options, float disorder_val)
 	final = ft_strjoin(final, operations(options));
 	if (!final)
 		return (-1);
-	i = 0;
-	while (final[i])
-		i++;
-	write(2, final, i);
+	len = ft_strlen(final);
+	write(2, final, len);
+	free(final);
 	return (0);
 }

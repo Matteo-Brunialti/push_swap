@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   benchmakr_utils2.c                                 :+:      :+:    :+:   */
+/*   benchmark_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 09:29:24 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/21 09:30:58 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/22 00:38:33 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	*operations(t_options *options)
 	line = ft_strjoin(sos("[bench] sa: "), ft_itoa(options->sa));
 	line = ft_strjoin(line, ft_strjoin(sos(" sb: "), ft_itoa(options->sb)));
 	line = ft_strjoin(line, ft_strjoin(sos(" ss: "), ft_itoa(options->ss)));
-	line = ft_strjoin(line, ft_strjoin(sos(" sb: "), ft_itoa(options->sb)));
 	line = ft_strjoin(line, ft_strjoin(sos(" pa: "), ft_itoa(options->pa)));
 	line = ft_strjoin(line, ft_strjoin(sos(" pb: "), ft_itoa(options->pb)));
 	line = ft_strjoin(line, ft_strjoin(sos("\n[bench] ra: "),

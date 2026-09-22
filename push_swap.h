@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 19:08:01 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/21 09:53:31 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/22 02:25:29 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,7 @@ void				swap_ss(t_dll **head1, t_dll **head2, t_options *options);
 
 // push
 void				push_pa(t_dll **head1, t_dll **head2, t_options *options);
-void				push_pb(t_dll **stack_a, t_dll **stack_b,
-						t_options *options);
+void				push_pb(t_dll **head1, t_dll **head2, t_options *options);
 
 // rotate
 void				rotate_ra(t_dll **head, t_options *options);
@@ -111,5 +110,9 @@ char				*sos(char *s1);
 
 // benchmark_utils2.c
 char				*operations(t_options *options);
+
+// last_fix.c
+void				sort_small(t_dll **stack1, t_dll **stack2,
+						t_options *options, int len);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:38:46 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/21 09:42:45 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/22 00:25:37 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@ static int	validate_int_args(int argc, char **argv, int shift)
 	ssize_t		i;
 	ssize_t		j;
 
-	i = 1;
-	while (i < (argc - 1))
+	i = shift + 1;
+	if (i >= argc)
+		return (-1);
+	while (i < argc)
 	{
 		j = i + 1;
 		tmp_i = is_int(argv[i]);
 		if (tmp_i == LLONG_MIN)
 			return (-1);
-		while (j < (argc - 1))
+		while (j < argc)
 		{
 			tmp_j = is_int(argv[j]);
 			if (tmp_j == LLONG_MIN || tmp_i == tmp_j)
@@ -35,9 +37,6 @@ static int	validate_int_args(int argc, char **argv, int shift)
 		}
 		i++;
 	}
-	tmp_i = is_int(argv[i]);
-	if (tmp_i == LLONG_MIN)
-		return (-1);
 	return (shift);
 }
 
@@ -58,7 +57,7 @@ static void	set_options_to_false(t_options *options)
 	options->simple = false;
 	options->medium = false;
 	options->complex = false;
-	options->adaptive = true;
+	options->adaptive = false;
 	options->bench = false;
 	options->sa = 0;
 	options->sb = 0;
@@ -71,47 +70,45 @@ static void	set_options_to_false(t_options *options)
 	options->rra = 0;
 	options->rrb = 0;
 	options->rrr = 0;
+	options->disorder = 0.0;
 }
 
-static	void	set_shift(t_options *options, int *shift)
+static int	parse_option(t_options *options, char *arg)
 {
-	if (options->simple)
-		(*shift)++;
-	if (options->medium)
-		(*shift)++;
-	if (options->complex)
-		(*shift)++;
-	if (options->adaptive)
-		(*shift)++;
-	if (options->bench)
-		(*shift)++;
+	if (option_cmp(arg, "--bench"))
+	{
+		if (options->bench)
+			return (-1);
+		options->bench = true;
+		return (0);
+	}
+	if (options->simple || options->medium || options->complex
+		|| options->adaptive)
+		return (-1);
+	options->simple = option_cmp(arg, "--simple");
+	options->medium = option_cmp(arg, "--medium");
+	options->complex = option_cmp(arg, "--complex");
+	options->adaptive = option_cmp(arg, "--adaptive");
+	if (!options->simple && !options->medium && !options->complex
+		&& !options->adaptive)
+		return (-1);
+	return (0);
 }
 
-/*
- * AO: this function assume argc and atgv has 3 argument in it
- * the program name and at least 2 argument let them be number  or option
- *
- * true only if only 1 argument is given
- *
- */
 int	validate_args(t_options *options, int argc, char **argv)
 {
-	int	shift;
+	int	i;
 
-	shift = 0;
-	if (argc == 2)
-		return (validate_int_args(argc, argv, shift));
 	set_options_to_false(options);
-	if (option_cmp(argv[1], "--simple") != option_cmp(argv[2], "--simple"))
-		options->simple = true;
-	if (option_cmp(argv[1], "--medium") != option_cmp(argv[2], "--medium"))
-		options->medium = true;
-	if (option_cmp(argv[1], "--complex") != option_cmp(argv[2], "--complex"))
-		options->complex = true;
-	if (options->simple || options->medium || options->complex)
-		options->adaptive = false;
-	if (option_cmp(argv[1], "--bench") != option_cmp(argv[2], "--bench"))
-		options->bench = true;
-	set_shift(options, &shift);
-	return (validate_int_args(argc - shift, argv + shift, shift));
+	i = 1;
+	while (i < argc && argv[i][0] == '-' && argv[i][1] == '-')
+	{
+		if (parse_option(options, argv[i]) == -1)
+			return (-1);
+		i++;
+	}
+	if (!options->simple && !options->medium && !options->complex
+		&& !options->adaptive)
+		options->adaptive = true;
+	return (validate_int_args(argc, argv, i - 1));
 }

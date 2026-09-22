@@ -1,7 +1,7 @@
 NAME	= push_swap
 
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -Wall -Wextra -Werror
 
 SRC		=	push_swap.c				\
 			rotate.c				\
@@ -14,7 +14,8 @@ SRC		=	push_swap.c				\
 			utils_algorithm.c		\
 			benchmark.c				\
 			benchmark_utils.c		\
-			benchmark_utils2.c	
+			benchmark_utils2.c		\
+			last_fix.c	
 
 OBJ		= $(SRC:.c=.o)
 

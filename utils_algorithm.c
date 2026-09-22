@@ -6,7 +6,7 @@
 /*   By: mbrunial <mbrunial@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 08:56:50 by mbrunial          #+#    #+#             */
-/*   Updated: 2026/09/21 09:03:41 by mbrunial         ###   ########.fr       */
+/*   Updated: 2026/09/22 02:25:50 by mbrunial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,27 @@ int	my_sqrt(int num)
 void	set_rank(t_dll **stack, int len_stack)
 {
 	t_dll	*curr;
-	t_dll	*min_node;
-	int		min_value;
+	t_dll	*not_curr;
 	int		i;
+	int		j;
 
+	if (!stack || !*stack)
+		return ;
 	i = 0;
-	min_node = (*stack);
+	curr = (*stack);
 	while (i < len_stack)
 	{
-		curr = (*stack);
-		min_value = INT_MAX;
-		while (curr->next != (*stack))
+		curr->rank = 0;
+		not_curr = (*stack);
+		j = 0;
+		while (j < len_stack)
 		{
-			if (curr->num < min_value && curr->rank < 0)
-			{
-				min_node = curr;
-				min_value = min_node->num;
-			}
-			curr = curr->next;
+			if (curr->num > not_curr->num)
+				(curr->rank)++;
+			not_curr = not_curr->next;
+			j++;
 		}
-		if (curr->num < min_value && curr->rank < 0)
-			min_node = curr;
-		min_node->rank = i;
+		curr = curr->next;
 		i++;
 	}
 }
@@ -56,7 +55,7 @@ void	set_rank(t_dll **stack, int len_stack)
 static void	rotate_i_times(t_dll **stack1, t_dll **stack2, t_options *options,
 		int i)
 {
-	while (i <= 0)
+	while (i > 0)
 	{
 		rotate_rb(stack2, options);
 		i--;
@@ -67,7 +66,7 @@ static void	rotate_i_times(t_dll **stack1, t_dll **stack2, t_options *options,
 static void	reverse_rotate_i_times(t_dll **stack1, t_dll **stack2,
 		t_options *options, int i)
 {
-	while (i <= 0)
+	while (i > 0)
 	{
 		reverse_rotate_rb(stack2, options);
 		i--;
@@ -75,32 +74,25 @@ static void	reverse_rotate_i_times(t_dll **stack1, t_dll **stack2,
 	push_pa(stack1, stack2, options);
 }
 
-void	range_sort_sorting(t_dll **stack1, t_dll **stack2,
-		t_options *options, int len_stack2)
+void	range_sort_sorting(t_dll **stack1, t_dll **stack2, t_options *options,
+		int len_stack2)
 {
 	t_dll	*curr;
 	int		i;
-	int		max_rank;
 
-	max_rank = len_stack2 - 1;
-	while (stack2)
+	while (*stack2)
 	{
 		curr = (*stack2);
 		i = 0;
-		while (i < (max_rank + 1))
+		while (curr->rank != (len_stack2 - 1))
 		{
-			if (curr->rank == max_rank)
-			{
-				if (i <= (len_stack2 / 2))
-					rotate_i_times(stack1, stack2, options, i);
-				else
-					reverse_rotate_i_times(stack1, stack2, options, len_stack2
-						- i);
-				max_rank--;
-				i = len_stack2;
-			}
 			curr = curr->next;
 			i++;
 		}
+		if (i <= (len_stack2 / 2))
+			rotate_i_times(stack1, stack2, options, i);
+		else
+			reverse_rotate_i_times(stack1, stack2, options, len_stack2 - i);
+		len_stack2--;
 	}
 }
